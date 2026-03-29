@@ -12,7 +12,7 @@
 
 ## 📸 Screenshot
 
-![TalentBot UI](./templates/Screenshot.png)
+![TalentBot UI](./templates/screenshot.png)
 
 ---
 
@@ -102,7 +102,7 @@ pip install -r requirements.txt
 python ingest.py
 ```
 
-This reads the markdown knowledge base, chunks it, generates embeddings, and saves the FAISS index locally.
+This reads `data/resume.txt`, chunks it, generates embeddings, and saves the FAISS index locally.
 
 ### 5. Run the application
 
@@ -117,15 +117,17 @@ Visit `http://127.0.0.1:8000` in your browser.
 ## 📁 Project Structure
 
 ```
-TalentBot-Nishanth/
+TalentBot/
 ├── main.py                  # FastAPI app entry point
 ├── ingest.py                # Ingestion pipeline (chunking + FAISS indexing)
+├── engine.py                # RAG query engine (retrieval + generation logic)
 ├── data/
-│   └── nishanth_rajan_chatbot_data.md   # Resume & FAQ knowledge base
+│   └── resume.txt           # Resume & FAQ knowledge base
 ├── faiss_index/             # Generated vector index (auto-created)
-├── static/
+├── templates/
 │   └── index.html           # Frontend UI (Tailwind CSS)
-├── .env                     # API keys (not committed)
+├── .env                     # API keys (never committed)
+├── .gitignore
 ├── requirements.txt
 └── README.md
 ```

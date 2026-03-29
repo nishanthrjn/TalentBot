@@ -14,8 +14,6 @@
 
 ![TalentBot UI](./templates/Screenshot.png)
 
-> *Replace `./static/screenshot.png` with the actual path to your screenshot once deployed.*
-
 ---
 
 ## 🛠️ Tech Stack

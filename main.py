@@ -1,15 +1,15 @@
+import os
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from engine import ask_talent_bot
 
 app = FastAPI()
 
-# 🛡️ CORS Middleware: This allows your Frontend (website) 
-# to talk to your Backend (API) safely.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, replace with your actual website URL
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -17,9 +17,11 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     message: str
 
+# 🆕 THIS PART IS NEW: It serves your HTML file directly
 @app.get("/")
-def read_root():
-    return {"status": "TalentBot is online!"}
+async def get_index():
+    # This looks for index.html inside your templates folder
+    return FileResponse('templates/index.html')
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
@@ -27,8 +29,8 @@ async def chat_endpoint(request: ChatRequest):
         response = ask_talent_bot(request.message)
         return {"reply": response}
     except Exception as e:
-        return {"reply": f"Sorry, I encountered an error: {str(e)}"}
+        return {"reply": f"Error: {str(e)}"}
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

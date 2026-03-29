@@ -12,7 +12,7 @@
 
 ## 📸 Screenshot
 
-![TalentBot UI](./templates/screenshot.png)
+![TalentBot UI](./templates/Screenshot.png)
 
 ---
 
